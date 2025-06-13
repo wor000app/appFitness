@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness App - Todas as Telas</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        color: #2d5a50;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #4a8173;
+        font-size: 1.2rem;
+      }
+
+      .screens-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .screen-card {
+        background: white;
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .screen-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+      }
+
+      .screen-title {
+        color: #2d5a50;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .screen-route {
+        color: #4a8173;
+        font-size: 0.9rem;
+        font-family: "Courier New", monospace;
+        background: #e0f2f1;
+        padding: 4px 8px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+      }
+
+      .screen-mockup {
+        width: 100%;
+        height: 500px;
+        background: linear-gradient(135deg, #b4d0ca 0%, #8db4ab 100%);
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+
+      .mockup-header {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .back-btn {
+        width: 32px;
+        height: 32px;
+        background: rgba(74, 129, 115, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #4a8173;
+      }
+
+      .mockup-title {
+        font-weight: bold;
+        color: #2d5a50;
+        font-size: 1.1rem;
+      }
+
+      .mockup-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: calc(100% - 80px);
+      }
+
+      .content-card {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+      }
+
+      .content-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .content-title {
+        font-weight: 600;
+        color: #2d5a50;
+      }
+
+      .content-value {
+        color: #4a8173;
+        font-weight: 500;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: rgba(180, 208, 202, 0.3);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 5px;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #4a8173;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
+      .features-list {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .features-list li {
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .features-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #4a8173;
+        font-weight: bold;
+      }
+
+      .navigation-bar {
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        right: 20px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        backdrop-filter: blur(10px);
+      }
+
+      .nav-item {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(74, 129, 115, 0.1);
+        color: #4a8173;
+        font-size: 1.2rem;
+      }
+
+      .nav-item.active {
+        background: #4a8173;
+        color: white;
+      }
+
+      .chart-placeholder {
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(45deg, #b4d0ca, #8db4ab);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .screens-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>🏋️ Fitness App - Todas as Telas</h1>
+      <p>Visão completa de todas as 13 páginas do aplicativo</p>
+    </div>
+
+    <div class="screens-grid">
+      <!-- 1. Dashboard -->
+      <div class="screen-card">
+        <div class="screen-title">🏠 Dashboard</div>
+        <div class="screen-route">Route: /</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="mockup-title">Olá! 👋</div>
+            <div style="color: #ff6b6b">🔥 7</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <div class="content-row">
+                <div class="content-title">Treino de Hoje</div>
+              </div>
+              <div style="color: #666; margin-bottom: 10px">
+                Peito e Bíceps • 45 min
+              </div>
+              <button
+                style="
+                  background: #4a8173;
+                  color: white;
+                  border: none;
+                  padding: 12px 20px;
+                  border-radius: 12px;
+                  width: 100%;
+                "
+              >
+                ▶️ Iniciar Treino
+              </button>
+            </div>
+            <div class="content-card">
+              <div class="content-row">
+                <div class="content-title">Progresso Semanal</div>
+                <div class="content-value">4/6</div>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 67%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item active">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Treino do dia com botão de início</li>
+          <li>Progresso semanal visual</li>
+          <li>Streak de dias consecutivos</li>
+          <li>Ações rápidas (calendario, estatísticas)</li>
+          <li>Navegação principal</li>
+        </ul>
+      </div>
+
+      <!-- 2. Timer -->
+      <div class="screen-card">
+        <div class="screen-title">⏱️ Timer</div>
+        <div class="screen-route">Route: /timer</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Timer de Treino</div>
+            <div style="width: 32px"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card" style="text-align: center">
+              <div
+                style="
+                  font-size: 3rem;
+                  font-weight: bold;
+                  color: #4a8173;
+                  margin: 20px 0;
+                "
+              >
+                02:30
+              </div>
+              <div style="margin-bottom: 20px">Round 1/5</div>
+              <div style="display: flex; gap: 10px; justify-content: center">
+                <button
+                  style="
+                    background: #4a8173;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                  "
+                >
+                  ▶️
+                </button>
+                <button
+                  style="
+                    background: #ff6b6b;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                  "
+                >
+                  ⏸️
+                </button>
+                <button
+                  style="
+                    background: #666;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                  "
+                >
+                  🔄
+                </button>
+              </div>
+            </div>
+            <div class="content-card">
+              <div class="content-title">Configurações</div>
+              <div style="margin-top: 10px">
+                <div style="margin-bottom: 5px">Trabalho: 2:30</div>
+                <div style="margin-bottom: 5px">Descanso: 0:30</div>
+                <div>Rounds: 5</div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item active">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Timer circular visual</li>
+          <li>Controles de play/pause/reset</li>
+          <li>Configuração de rounds</li>
+          <li>Timer para descanso</li>
+          <li>Presets personalizáveis</li>
+        </ul>
+      </div>
+
+      <!-- 3. Profile -->
+      <div class="screen-card">
+        <div class="screen-title">👤 Profile</div>
+        <div class="screen-route">Route: /profile</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Profile</div>
+            <div class="back-btn">✏️</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card" style="text-align: center">
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(45deg, #4a8173, #66998c);
+                  border-radius: 50%;
+                  margin: 0 auto 15px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: bold;
+                "
+              >
+                IR
+              </div>
+              <div style="font-weight: bold; margin-bottom: 5px">
+                Isabelli Roberts
+              </div>
+              <div style="color: #666; margin-bottom: 15px">
+                @isabelli_roberts
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 15px;
+                  border-radius: 12px;
+                "
+              >
+                <div style="font-size: 1.5rem; font-weight: bold">6,859</div>
+                <div style="color: #666; font-size: 0.9rem">Steps today</div>
+              </div>
+            </div>
+            <div class="content-card">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  padding: 8px 0;
+                "
+              >
+                <div
+                  style="
+                    background: rgba(74, 129, 115, 0.2);
+                    padding: 8px;
+                    border-radius: 8px;
+                  "
+                >
+                  👥
+                </div>
+                <div>Friends</div>
+                <div style="margin-left: auto">→</div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item active">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Avatar e informações pessoais</li>
+          <li>Estatísticas de passos</li>
+          <li>Menu de configurações</li>
+          <li>Link para amigos</li>
+          <li>Opções de edição</li>
+        </ul>
+      </div>
+
+      <!-- 4. Workout Routines -->
+      <div class="screen-card">
+        <div class="screen-title">💪 Rotinas de Treino</div>
+        <div class="screen-route">Route: /routines</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Rotinas</div>
+            <div class="back-btn">+</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <div class="content-row">
+                <div class="content-title">💪 PROTOCOLO HIPERTROFIA</div>
+                <div style="color: #666">⌄</div>
+              </div>
+              <div style="color: #666; font-size: 0.9rem; margin-bottom: 10px">
+                05/05/2025 - 14/06/2025 • Avançado
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 10px;
+                  border-radius: 8px;
+                  margin-bottom: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 4px">
+                  Peito e Bíceps
+                </div>
+                <div style="color: #666; font-size: 0.9rem">
+                  6 exercícios • Último: ontem
+                </div>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 10px;
+                  border-radius: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 4px">
+                  Costas e Tríceps
+                </div>
+                <div style="color: #666; font-size: 0.9rem">
+                  7 exercícios • Último: 2 dias
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item active">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Protocolos organizados por período</li>
+          <li>Lista de treinos por protocolo</li>
+          <li>Indicador de última execução</li>
+          <li>Botão para criar novos treinos</li>
+          <li>Sistema expansível/retrátil</li>
+        </ul>
+      </div>
+
+      <!-- 5. Create Workout -->
+      <div class="screen-card">
+        <div class="screen-title">➕ Criar Treino</div>
+        <div class="screen-route">Route: /create-workout</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Novo Treino</div>
+            <div class="back-btn">💾</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <input
+                type="text"
+                placeholder="Nome do treino"
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                  margin-bottom: 10px;
+                "
+              />
+              <select
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                "
+              >
+                <option>Grupo muscular</option>
+              </select>
+            </div>
+            <div class="content-card">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 15px;
+                "
+              >
+                <div class="content-title">Exercícios</div>
+                <button
+                  style="
+                    background: #4a8173;
+                    color: white;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                  "
+                >
+                  + Adicionar
+                </button>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                  margin-bottom: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">
+                  Supino Reto
+                </div>
+                <div style="color: #666; font-size: 0.9rem">
+                  4 séries • 8-12 reps • 70kg
+                </div>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">Flexão</div>
+                <div style="color: #666; font-size: 0.9rem">
+                  3 séries • 12-15 reps • Peso corporal
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item active">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Formulário para nome e grupo muscular</li>
+          <li>Sistema de adição de exercícios</li>
+          <li>Configuração de séries, reps e peso</li>
+          <li>Upload de vídeos demonstrativos</li>
+          <li>Salvar como template</li>
+        </ul>
+      </div>
+
+      <!-- 6. Statistics -->
+      <div class="screen-card">
+        <div class="screen-title">📊 Estatísticas</div>
+        <div class="screen-route">Route: /progress</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Estatísticas</div>
+            <div style="width: 32px"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <div class="content-title" style="margin-bottom: 15px">
+                📈 Resumo do Mês
+              </div>
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px"
+              >
+                <div
+                  style="
+                    text-align: center;
+                    background: rgba(74, 129, 115, 0.1);
+                    padding: 12px;
+                    border-radius: 8px;
+                  "
+                >
+                  <div
+                    style="font-size: 1.5rem; font-weight: bold; color: #4a8173"
+                  >
+                    28
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">Treinos</div>
+                </div>
+                <div
+                  style="
+                    text-align: center;
+                    background: rgba(74, 129, 115, 0.1);
+                    padding: 12px;
+                    border-radius: 8px;
+                  "
+                >
+                  <div
+                    style="font-size: 1.5rem; font-weight: bold; color: #4a8173"
+                  >
+                    87%
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">Consistência</div>
+                </div>
+              </div>
+            </div>
+            <div class="content-card">
+              <div class="content-title" style="margin-bottom: 10px">
+                🎯 Metas do Mês
+              </div>
+              <div style="margin-bottom: 12px">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+                  "
+                >
+                  <span style="font-size: 0.9rem">Treinos realizados</span>
+                  <span style="font-size: 0.9rem; font-weight: 600">28/30</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 93%"></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+                  "
+                >
+                  <span style="font-size: 0.9rem">Peso alvo</span>
+                  <span style="font-size: 0.9rem; font-weight: 600"
+                    >75/78kg</span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 96%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item active">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Resumo mensal com KPIs</li>
+          <li>Metas com barras de progresso</li>
+          <li>Gráficos de frequência semanal</li>
+          <li>Distribuição por grupos musculares</li>
+          <li>Evolução corporal ao longo do tempo</li>
+        </ul>
+      </div>
+
+      <!-- 7. Calendar -->
+      <div class="screen-card">
+        <div class="screen-title">📅 Calendário</div>
+        <div class="screen-route">Route: /calendar</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Frequência de Treinos</div>
+            <div style="width: 32px"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 15px;
+                "
+              >
+                <div class="back-btn">‹</div>
+                <div class="content-title">Junho 2025</div>
+                <div class="back-btn">›</div>
+              </div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(7, 1fr);
+                  gap: 4px;
+                  text-align: center;
+                "
+              >
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  S
+                </div>
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  T
+                </div>
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  Q
+                </div>
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  Q
+                </div>
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  S
+                </div>
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  S
+                </div>
+                <div style="font-size: 0.8rem; color: #666; padding: 8px">
+                  D
+                </div>
+                <div style="padding: 8px; font-size: 0.9rem">1</div>
+                <div
+                  style="
+                    padding: 8px;
+                    font-size: 0.9rem;
+                    background: #4a8173;
+                    color: white;
+                    border-radius: 6px;
+                  "
+                >
+                  2
+                </div>
+                <div style="padding: 8px; font-size: 0.9rem">3</div>
+                <div style="padding: 8px; font-size: 0.9rem">4</div>
+                <div
+                  style="
+                    padding: 8px;
+                    font-size: 0.9rem;
+                    background: #4a8173;
+                    color: white;
+                    border-radius: 6px;
+                  "
+                >
+                  5
+                </div>
+                <div style="padding: 8px; font-size: 0.9rem">6</div>
+                <div style="padding: 8px; font-size: 0.9rem">7</div>
+              </div>
+            </div>
+            <div class="content-card">
+              <div class="content-title" style="margin-bottom: 10px">
+                Resumo do Mês
+              </div>
+              <div style="display: flex; justify-content: space-between">
+                <div>Treinos realizados: <strong>7</strong></div>
+                <div>Meta: <strong>12</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item active">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Calendário mensal visual</li>
+          <li>Dias com treino destacados</li>
+          <li>Navegação entre meses</li>
+          <li>Resumo de treinos do mês</li>
+          <li>Indicador de progresso da meta</li>
+        </ul>
+      </div>
+
+      <!-- 8. Friends -->
+      <div class="screen-card">
+        <div class="screen-title">👥 Amigos</div>
+        <div class="screen-route">Route: /friends</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Amigos</div>
+            <div class="back-btn">🔍</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr 1fr;
+                  gap: 15px;
+                  text-align: center;
+                "
+              >
+                <div>
+                  <div
+                    style="font-size: 1.5rem; font-weight: bold; color: #4a8173"
+                  >
+                    4
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">Amigos</div>
+                </div>
+                <div>
+                  <div
+                    style="font-size: 1.5rem; font-weight: bold; color: #4a8173"
+                  >
+                    3
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">Online</div>
+                </div>
+                <div>
+                  <div
+                    style="font-size: 1.5rem; font-weight: bold; color: #4a8173"
+                  >
+                    2
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">Solicitações</div>
+                </div>
+              </div>
+            </div>
+            <div class="content-card">
+              <div class="content-title" style="margin-bottom: 15px">
+                👥 Meus Amigos
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <div
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    background: #4a8173;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-weight: bold;
+                    position: relative;
+                  "
+                >
+                  A
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: -2px;
+                      right: -2px;
+                      width: 12px;
+                      height: 12px;
+                      background: #22c55e;
+                      border: 2px solid white;
+                      border-radius: 50%;
+                    "
+                  ></div>
+                </div>
+                <div style="flex: 1">
+                  <div style="font-weight: 600; margin-bottom: 2px">
+                    Ana Silva
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">
+                    5 treinos/semana • 12 dias
+                  </div>
+                </div>
+                <div class="back-btn">💬</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px">
+                <div
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    background: #4a8173;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-weight: bold;
+                    position: relative;
+                  "
+                >
+                  C
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: -2px;
+                      right: -2px;
+                      width: 12px;
+                      height: 12px;
+                      background: #6b7280;
+                      border: 2px solid white;
+                      border-radius: 50%;
+                    "
+                  ></div>
+                </div>
+                <div style="flex: 1">
+                  <div style="font-weight: 600; margin-bottom: 2px">
+                    Carlos Santos
+                  </div>
+                  <div style="font-size: 0.8rem; color: #666">
+                    3 treinos/semana • 8 dias
+                  </div>
+                </div>
+                <div class="back-btn">💬</div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item active">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Estatísticas rápidas de amigos</li>
+          <li>Lista de amigos com status online</li>
+          <li>Solicitações de amizade pendentes</li>
+          <li>Estatísticas de treino dos amigos</li>
+          <li>Chat/mensagem integrado</li>
+        </ul>
+      </div>
+
+      <!-- 9. Workout Detail -->
+      <div class="screen-card">
+        <div class="screen-title">🏋️ Detalhes do Treino</div>
+        <div class="screen-route">Route: /workout/:id</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Peito e Bíceps</div>
+            <div class="back-btn">⋮</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  margin-bottom: 15px;
+                "
+              >
+                <div>
+                  <div style="color: #666; font-size: 0.9rem">
+                    Duração estimada
+                  </div>
+                  <div style="font-weight: bold">45 min</div>
+                </div>
+                <div>
+                  <div style="color: #666; font-size: 0.9rem">Exercícios</div>
+                  <div style="font-weight: bold">6</div>
+                </div>
+                <div>
+                  <div style="color: #666; font-size: 0.9rem">Dificuldade</div>
+                  <div style="font-weight: bold">⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <button
+                style="
+                  background: #4a8173;
+                  color: white;
+                  border: none;
+                  padding: 12px 20px;
+                  border-radius: 12px;
+                  width: 100%;
+                "
+              >
+                ▶️ Iniciar Treino
+              </button>
+            </div>
+            <div class="content-card">
+              <div class="content-title" style="margin-bottom: 15px">
+                Exercícios
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                  margin-bottom: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">
+                  1. Supino Reto
+                </div>
+                <div style="color: #666; font-size: 0.9rem; margin-bottom: 5px">
+                  4 séries • 8-12 reps • 70kg
+                </div>
+                <div style="color: #666; font-size: 0.8rem">Descanso: 90s</div>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                  margin-bottom: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">
+                  2. Supino Inclinado
+                </div>
+                <div style="color: #666; font-size: 0.9rem; margin-bottom: 5px">
+                  3 séries • 10-12 reps • 60kg
+                </div>
+                <div style="color: #666; font-size: 0.8rem">Descanso: 75s</div>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">
+                  3. Rosca Direta
+                </div>
+                <div style="color: #666; font-size: 0.9rem; margin-bottom: 5px">
+                  3 séries • 12-15 reps • 15kg
+                </div>
+                <div style="color: #666; font-size: 0.8rem">Descanso: 60s</div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item active">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Informações detalhadas do treino</li>
+          <li>Lista completa de exercícios</li>
+          <li>Séries, repetições e pesos</li>
+          <li>Tempo de descanso por exercício</li>
+          <li>Botão para iniciar execução</li>
+        </ul>
+      </div>
+
+      <!-- 10. Create Routine -->
+      <div class="screen-card">
+        <div class="screen-title">📋 Criar Rotina</div>
+        <div class="screen-route">Route: /create-routine</div>
+        <div class="screen-mockup">
+          <div class="mockup-header">
+            <div class="back-btn">←</div>
+            <div class="mockup-title">Nova Rotina</div>
+            <div class="back-btn">💾</div>
+          </div>
+          <div class="mockup-content">
+            <div class="content-card">
+              <input
+                type="text"
+                placeholder="Nome da rotina"
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                  margin-bottom: 10px;
+                "
+              />
+              <textarea
+                placeholder="Descrição..."
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                  height: 60px;
+                  margin-bottom: 10px;
+                  resize: none;
+                "
+              ></textarea>
+              <div style="display: flex; gap: 10px">
+                <input
+                  type="date"
+                  style="
+                    flex: 1;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                  "
+                />
+                <input
+                  type="date"
+                  style="
+                    flex: 1;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                  "
+                />
+              </div>
+            </div>
+            <div class="content-card">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 15px;
+                "
+              >
+                <div class="content-title">Treinos na Rotina</div>
+                <button
+                  style="
+                    background: #4a8173;
+                    color: white;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                  "
+                >
+                  + Adicionar
+                </button>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                  margin-bottom: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">
+                  Peito e Bíceps
+                </div>
+                <div style="color: #666; font-size: 0.9rem">
+                  6 exercícios • 45 min
+                </div>
+              </div>
+              <div
+                style="
+                  background: rgba(74, 129, 115, 0.1);
+                  padding: 12px;
+                  border-radius: 8px;
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 5px">
+                  Costas e Tríceps
+                </div>
+                <div style="color: #666; font-size: 0.9rem">
+                  7 exercícios • 50 min
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item active">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Formulário de criação de rotina</li>
+          <li>Período de execução da rotina</li>
+          <li>Seleção de treinos existentes</li>
+          <li>Ordem dos treinos na rotina</li>
+          <li>Nível de dificuldade</li>
+        </ul>
+      </div>
+
+      <!-- 11. Index -->
+      <div class="screen-card">
+        <div class="screen-title">🏠 Página Inicial</div>
+        <div class="screen-route">Route: / (redirect)</div>
+        <div class="screen-mockup">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+              text-align: center;
+              color: #4a8173;
+            "
+          >
+            <div>
+              <div style="font-size: 4rem; margin-bottom: 20px">🏋️</div>
+              <div
+                style="
+                  font-size: 1.5rem;
+                  font-weight: bold;
+                  margin-bottom: 10px;
+                "
+              >
+                Fitness App
+              </div>
+              <div style="color: #666">Redirecionando para Dashboard...</div>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item active">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Página de entrada do aplicativo</li>
+          <li>Redirecionamento automático</li>
+          <li>Splash screen simples</li>
+          <li>Logo e identidade visual</li>
+        </ul>
+      </div>
+
+      <!-- 12. Placeholder -->
+      <div class="screen-card">
+        <div class="screen-title">🚧 Página em Construção</div>
+        <div class="screen-route">Route: /placeholder</div>
+        <div class="screen-mockup">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+              text-align: center;
+              color: #4a8173;
+            "
+          >
+            <div>
+              <div style="font-size: 4rem; margin-bottom: 20px">🚧</div>
+              <div
+                style="
+                  font-size: 1.5rem;
+                  font-weight: bold;
+                  margin-bottom: 10px;
+                "
+              >
+                Em Construção
+              </div>
+              <div style="color: #666; margin-bottom: 20px">
+                Esta página está sendo desenvolvida
+              </div>
+              <button
+                style="
+                  background: #4a8173;
+                  color: white;
+                  border: none;
+                  padding: 12px 20px;
+                  border-radius: 12px;
+                "
+              >
+                ← Voltar
+              </button>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Página temporária para desenvolvimento</li>
+          <li>Placeholder para futuras funcionalidades</li>
+          <li>Botão de navegação de volta</li>
+          <li>Design consistente com o app</li>
+        </ul>
+      </div>
+
+      <!-- 13. Not Found -->
+      <div class="screen-card">
+        <div class="screen-title">❌ Página Não Encontrada</div>
+        <div class="screen-route">Route: * (catch-all)</div>
+        <div class="screen-mockup">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+              text-align: center;
+              color: #4a8173;
+            "
+          >
+            <div>
+              <div style="font-size: 4rem; margin-bottom: 20px">❌</div>
+              <div
+                style="
+                  font-size: 1.5rem;
+                  font-weight: bold;
+                  margin-bottom: 10px;
+                "
+              >
+                404
+              </div>
+              <div style="color: #666; margin-bottom: 20px">
+                Página não encontrada
+              </div>
+              <button
+                style="
+                  background: #4a8173;
+                  color: white;
+                  border: none;
+                  padding: 12px 20px;
+                  border-radius: 12px;
+                "
+              >
+                🏠 Ir para Home
+              </button>
+            </div>
+          </div>
+          <div class="navigation-bar">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">⏱️</div>
+            <div class="nav-item">👤</div>
+            <div class="nav-item">💪</div>
+            <div class="nav-item">📊</div>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Tela de erro 404</li>
+          <li>Catch-all para rotas inexistentes</li>
+          <li>Navegação de volta para home</li>
+          <li>Design amigável ao usuário</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; color: #4a8173">
+      <p>
+        <strong>Total: 13 telas completas</strong> • Design System consistente •
+        Navegação integrada
+      </p>
+    </div>
+  </body>
+</html>
